@@ -1,3 +1,4 @@
+import com.alibaba.dubbo.rpc.RpcContext;
 import com.pku.netlab.service.HelloWorldService;
 
 import java.sql.Timestamp;
@@ -17,8 +18,16 @@ public class Consumer {
         config.config();
         while (true) {
             HelloWorldService service = config.getHelloWorldService();
-            String result = service.sayHello(String.valueOf(System.currentTimeMillis()));
-            System.out.println(result);
+            /**客户端: 获取provider端的sayHello()
+             * String result = service.sayHello(String.valueOf(System.currentTimeMillis()));
+             */
+            for (int i = 0; i < 5; i ++){
+                String parm = String.valueOf(System.currentTimeMillis());
+                RpcContext.getContext().setAttachment(parm, "parm"+i);
+                String result = service.getParm();
+                System.out.println(result);
+                System.out.println("==================");
+            }
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {

@@ -28,7 +28,7 @@ public class DubboConsumerConfig {
         RegistryConfig registryConfig = new RegistryConfig();
         registryConfig.setAddress("redis://127.0.0.1:6379");
         registryConfig.setUsername("requirepass");
-        registryConfig.setPassword("requirepass@redis");
+        registryConfig.setPassword("p@ssword4requirepass");
 //        registryConfig.setClient("curator");  // 待定
 
         ReferenceConfig<HelloWorldService> referenceConfig = new ReferenceConfig<>();

@@ -20,7 +20,7 @@ import org.apache.zookeeper.ZooKeeper;
 public class DubboProviderConfig {
     static{
         HelloWorldService helloWorldService = new HelloWorldServiceImpl();
-        Logger logger = Logger.getLogger(ZooKeeper.class);
+//        Logger logger = Logger.getLogger(DubboProviderConfig.class);
 //          PropertyConfigurator.configure ("/home/yuan/Code/IdeaProjects/NativeDubbo/nativedubboprovider/src/main/resources/log4j.properties");
 //          BasicConfigurator.configure();
 
@@ -30,7 +30,7 @@ public class DubboProviderConfig {
         RegistryConfig registryConfig = new RegistryConfig();
           registryConfig.setAddress("redis://127.0.0.1:6379");
           registryConfig.setUsername("requirepass");
-          registryConfig.setPassword("requirepass@redis");
+          registryConfig.setPassword("p@ssword4requirepass");
 //        registryConfig.setAddress("zookeeper://219.223.196.9:2111");
 //          registryConfig.setClient("curator");  // 待定
 

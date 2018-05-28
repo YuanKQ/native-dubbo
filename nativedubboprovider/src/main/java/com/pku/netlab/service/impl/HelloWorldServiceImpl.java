@@ -13,6 +13,7 @@ import com.pku.netlab.service.HelloWorldService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class HelloWorldServiceImpl implements HelloWorldService {
     @Override
@@ -23,5 +24,16 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 
 //        System.out.println(name + " request service.");
 //        return "Hello, " + name;
+    }
+
+    @Override
+    public String getParm() {
+        Map<String, String> parmMap = RpcContext.getContext().getAttachments();
+        System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + ", request from consumer: " + RpcContext
+                .getContext().getRemoteAddress());
+        for(Map.Entry<String, String> entry: parmMap.entrySet())
+            System.out.println("[" + entry.getKey() + "]: " + entry.getValue());
+        System.out.println("==================");
+        return "Provider has received param.";
     }
 }
