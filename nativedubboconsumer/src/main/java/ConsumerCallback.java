@@ -20,23 +20,29 @@ public class ConsumerCallback implements Serializable{
         config.config();
         System.out.println("@@@Finish config");
 
-            CallbackService callbackService = config.getCallbackService();
-            System.out.println(callbackService.test("consumer"));
+        CallbackService callbackService = config.getCallbackService();
+//            System.out.println(callbackService.test("consumer"));
 
-//            CallbackListener listener = new CallbackListener() {
-//                @Override
-//                public void changed(String msg) {
-//                    System.out.println("First callback: " + msg);
-//                }
-//            };
-//            callbackService.addListener("First", listener);
+        CallbackListener listener = new CallbackListener() {
+            @Override
+            public void changed(String msg) {
+                System.out.println("callback1: " + msg);
+            }
+        };
+        callbackService.addListener("First", listener);
 
-            callbackService.addListener("Second", new CallbackListener() {
-                @Override
-                public void changed(String msg) {
-                    System.out.println("Second callback: " + msg);
-                }
-            });
+        callbackService.addListener("Second", new CallbackListener() {
+            @Override
+            public void changed(String msg) {
+                System.out.println("callback2: " + msg);
+            }
+        });
+        callbackService.addListener("Third", new CallbackListener() {
+            @Override
+            public void changed(String msg) {
+                System.out.println("callback3: " + msg);
+            }
+        });
         while (true) {
             try {
                 Thread.sleep(1000);

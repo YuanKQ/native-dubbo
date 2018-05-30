@@ -3,7 +3,7 @@
  * Date: 18-5-27 下午8:27
  * Email: kq_yuan@outlook.com
  *
- * Description:
+ * Description: Provider端配置函数
  *
  ******************************/
 package com.pku.netlab;
@@ -60,7 +60,11 @@ public class DubboProviderConfig {
         methodConfigs.add(methodConfig);
 
         ServiceConfig<CallbackService> callbackConfig = new ServiceConfig<>();
-        callbackConfig.setApplication(applicationConfig);
+        /* 提供callback服务实例数量
+           >=Consumer调用callbackService.addListener的次数, 否则出现:
+           java.lang.IllegalStateException: interface com.pku.netlab.service.CallbackListener `s callback instances num exceed providers limit :2 ,current num: 3. The new callback service will not work !!! you can cancle the callback service which exported before. channel :NettyChannel [channel=[id: 0x006379eb, /219.223.196.9:43346 => /219.223.196.9:20899]]3
+         */
+        callbackConfig.setCallbacks(3);  callbackConfig.setApplication(applicationConfig);
         callbackConfig.setRegistry(registryConfig);
         callbackConfig.setProtocol(protocolConfig);
         callbackConfig.setInterface(CallbackService.class);
