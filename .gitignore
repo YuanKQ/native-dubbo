@@ -1,0 +1,7 @@
+
+/.idea/
+/nativedubboprovider/.idea/
+/nativedubboprovider/logs/
+/nativedubboprovider/target/
+/nativedubboprovider/nativedubboprovider.iml
+/nativedubboconsumer/nativedubboconsumer.iml

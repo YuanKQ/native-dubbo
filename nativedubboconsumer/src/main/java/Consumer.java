@@ -18,9 +18,11 @@ public class Consumer {
         config.config();
         while (true) {
             HelloWorldService service = config.getHelloWorldService();
-            /**客户端: 获取provider端的sayHello()
+            /**
+             * 客户端: 获取provider端的sayHello()
              * String result = service.sayHello(String.valueOf(System.currentTimeMillis()));
              */
+            // 隐含参数调用
             for (int i = 0; i < 5; i ++){
                 String parm = String.valueOf(System.currentTimeMillis());
                 RpcContext.getContext().setAttachment(parm, "parm"+i);
