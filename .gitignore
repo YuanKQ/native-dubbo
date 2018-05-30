@@ -4,4 +4,12 @@
 /nativedubboprovider/logs/
 /nativedubboprovider/target/
 /nativedubboprovider/nativedubboprovider.iml
-/nativedubboconsumer/nativedubboconsumer.iml
+
+nativedubboconsumer/.idea/
+nativedubboconsumer/native-dubbo-consumer.iml
+nativedubboconsumer/src/test/
+nativedubboconsumer/target/
+nativedubboprovider/src/test/
+/.directory
+/nativedubboconsumer/.directory
+/nativedubboprovider/.directory

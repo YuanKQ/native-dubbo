@@ -13,4 +13,5 @@ import java.io.Serializable;
 
 public interface CallbackListener{
     void changed(String msg);
+    void getSumResult(int sum);
 }

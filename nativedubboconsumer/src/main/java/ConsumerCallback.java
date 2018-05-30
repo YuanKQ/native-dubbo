@@ -23,15 +23,23 @@ public class ConsumerCallback implements Serializable{
         CallbackService callbackService = config.getCallbackService();
 //            System.out.println(callbackService.test("consumer"));
 
+        // 每5000ms更新msg
         CallbackListener listener = new CallbackListener() {
             @Override
             public void changed(String msg) {
                 System.out.println("callback1: " + msg);
             }
+
+            @Override
+            public void getSumResult(int sum) {}
         };
         callbackService.addListener("First", listener);
 
         callbackService.addListener("Second", new CallbackListener() {
+            @Override
+            public void getSumResult(int sum) {
+            }
+
             @Override
             public void changed(String msg) {
                 System.out.println("callback2: " + msg);
@@ -41,6 +49,34 @@ public class ConsumerCallback implements Serializable{
             @Override
             public void changed(String msg) {
                 System.out.println("callback3: " + msg);
+            }
+
+            @Override
+            public void getSumResult(int sum) {
+            }
+        });
+
+        // 求和任务
+        int[] nums = {1,10, 11, 21, 32};
+        callbackService.sum(nums, new CallbackListener() {
+            @Override
+            public void changed(String msg) {
+            }
+
+            @Override
+            public void getSumResult(int sum) {
+                System.out.println("The first sum is : " + sum);
+            }
+        });
+        int[] nums1 = {21,110, 131, 21, 32};
+        callbackService.sum(nums1, new CallbackListener() {
+            @Override
+            public void changed(String msg) {
+            }
+
+            @Override
+            public void getSumResult(int sum) {
+                System.out.println("The second sum is : " + sum);
             }
         });
         while (true) {

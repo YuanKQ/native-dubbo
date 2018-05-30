@@ -11,4 +11,5 @@ package com.pku.netlab.service;
 
 public interface CallbackListener {
     void changed(String msg);
+    void getSumResult(int sum);
 }

@@ -12,4 +12,6 @@ package com.pku.netlab.service;
 public interface CallbackService {
     void addListener(String key, CallbackListener listener);
     String test(String name);
+    void sum(int[] nums, CallbackListener listener);
 }
+

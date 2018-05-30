@@ -20,6 +20,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CallbackServiceImpl implements CallbackService{
+    @Override
+    public void sum(int[] nums, CallbackListener listener) {
+        int sum = 0;
+        for (int num: nums)
+            sum += num;
+        listener.getSumResult(sum);
+    }
+
     private final Map<String, CallbackListener> listeners = new ConcurrentHashMap<>();
     static final Logger logger = Logger.getLogger(CallbackServiceImpl.class);
 

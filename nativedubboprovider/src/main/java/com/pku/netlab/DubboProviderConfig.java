@@ -47,7 +47,10 @@ public class DubboProviderConfig {
 //        service.setVersion("1.0.0");
         service.export();
 
-        // callbackservice配置
+        /************************
+         * callbackservice配置
+         ************************/
+        // 回调函数addListener配置.
         List<MethodConfig> methodConfigs = new ArrayList<>();
         MethodConfig methodConfig = new MethodConfig();
         methodConfig.setName("addListener");
@@ -58,13 +61,27 @@ public class DubboProviderConfig {
         argumentConfigs.add(arg);
         methodConfig.setArguments(argumentConfigs);
         methodConfigs.add(methodConfig);
+        // 回调函数sum配置
+        MethodConfig sumMethodConfig = new MethodConfig();
+        sumMethodConfig.setName("sum");
+        List<ArgumentConfig> argumentConfigs1 = new ArrayList<>();
+        // 这里的argument可以重复利用上文的arg
+//        ArgumentConfig arg1 = new ArgumentConfig();
+//        arg1.setIndex(1);
+//        arg1.setCallback(true);
+//        argumentConfigs1.add(arg1);
+        argumentConfigs1.add(arg);
+        sumMethodConfig.setArguments(argumentConfigs1);
+        methodConfigs.add(sumMethodConfig);
 
         ServiceConfig<CallbackService> callbackConfig = new ServiceConfig<>();
         /* 提供callback服务实例数量
            >=Consumer调用callbackService.addListener的次数, 否则出现:
            java.lang.IllegalStateException: interface com.pku.netlab.service.CallbackListener `s callback instances num exceed providers limit :2 ,current num: 3. The new callback service will not work !!! you can cancle the callback service which exported before. channel :NettyChannel [channel=[id: 0x006379eb, /219.223.196.9:43346 => /219.223.196.9:20899]]3
+           Ref: https://github.com/apache/incubator-dubbo/issues/473
          */
-        callbackConfig.setCallbacks(3);  callbackConfig.setApplication(applicationConfig);
+        callbackConfig.setCallbacks(100);
+        callbackConfig.setApplication(applicationConfig);
         callbackConfig.setRegistry(registryConfig);
         callbackConfig.setProtocol(protocolConfig);
         callbackConfig.setInterface(CallbackService.class);
