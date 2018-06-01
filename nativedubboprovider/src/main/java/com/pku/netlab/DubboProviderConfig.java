@@ -11,8 +11,10 @@ package com.pku.netlab;
 import com.alibaba.dubbo.config.*;
 import com.pku.netlab.service.CallbackService;
 import com.pku.netlab.service.HelloWorldService;
+import com.pku.netlab.service.UserService;
 import com.pku.netlab.service.impl.CallbackServiceImpl;
 import com.pku.netlab.service.impl.HelloWorldServiceImpl;
+import com.pku.netlab.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class DubboProviderConfig {
     static{
         HelloWorldService helloWorldService = new HelloWorldServiceImpl();
         CallbackService callbackService = new CallbackServiceImpl();
+        UserService userService = new UserServiceImpl();
         Logger logger = Logger.getLogger(DubboProviderConfig.class);
 
         ApplicationConfig applicationConfig = new ApplicationConfig();
@@ -89,6 +92,15 @@ public class DubboProviderConfig {
         callbackConfig.setRef(callbackService);
         callbackConfig.setMethods(methodConfigs);
         callbackConfig.export();
+
+
+        ServiceConfig<UserService> userServiceConfig = new ServiceConfig<>();
+        userServiceConfig.setApplication(applicationConfig);
+        userServiceConfig.setRegistry(registryConfig);
+        userServiceConfig.setProtocol(protocolConfig);
+        userServiceConfig.setInterface(UserService.class);
+        userServiceConfig.setRef(userService);
+        userServiceConfig.export();
 
         logger.info("The configuration of provider has finished.");
 

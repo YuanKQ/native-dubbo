@@ -3,6 +3,7 @@ import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.pku.netlab.service.CallbackService;
 import com.pku.netlab.service.HelloWorldService;
+import com.pku.netlab.service.UserService;
 import jdk.nashorn.internal.codegen.CompilerConstants;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.ZooKeeper;
@@ -19,6 +20,7 @@ import org.apache.zookeeper.ZooKeeper;
 public class DubboConsumerConfig {
     private HelloWorldService helloWorldService;
     private CallbackService callbackService;
+    private UserService userService;
     static Logger logger = Logger.getLogger(DubboConsumerConfig.class);
     public HelloWorldService getHelloWorldService() {
         return helloWorldService;
@@ -26,6 +28,10 @@ public class DubboConsumerConfig {
 
     public CallbackService getCallbackService() {
         return callbackService;
+    }
+
+    public UserService getUserService() {
+        return userService;
     }
 
     public void config() {
@@ -52,5 +58,11 @@ public class DubboConsumerConfig {
         callbackServiceReferenceConfig.setRegistry(registryConfig);
         callbackServiceReferenceConfig.setInterface(CallbackService.class);
         this.callbackService = callbackServiceReferenceConfig.get();
+
+        ReferenceConfig<UserService> userServiceReferenceConfig = new ReferenceConfig<>();
+        userServiceReferenceConfig.setApplication(applicationConfig);
+        userServiceReferenceConfig.setRegistry(registryConfig);
+        userServiceReferenceConfig.setInterface(UserService.class);
+        this.userService = userServiceReferenceConfig.get();
     }
 }
