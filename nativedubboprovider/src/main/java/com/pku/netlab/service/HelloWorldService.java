@@ -11,4 +11,5 @@ package com.pku.netlab.service;
 public interface HelloWorldService {
     String sayHello(String name);
     String getParm();
+    String asyncSayHello(String name);
 }

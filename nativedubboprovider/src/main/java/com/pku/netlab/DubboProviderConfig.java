@@ -43,6 +43,7 @@ public class DubboProviderConfig {
         service.setProtocol(protocolConfig);
         service.setInterface(HelloWorldService.class);
         service.setRef(helloWorldService);
+        service.setTimeout(10000);
 //        service.setExecutes(10);  // 服务提供者每服务每方法最大可并行执行请求数, 0表示不限制
 //        service.setVersion("1.0.0");
         service.export();

@@ -40,11 +40,12 @@ public class DubboConsumerConfig {
 
 //        registryConfig.setClient("curator");  // 待定
 
-//        ReferenceConfig<HelloWorldService> referenceConfig = new ReferenceConfig<>();
-//        referenceConfig.setApplication(applicationConfig);
-//        referenceConfig.setRegistry(registryConfig);
-//        referenceConfig.setInterface(HelloWorldService.class);
-//        this.helloWorldService = referenceConfig.get();
+        ReferenceConfig<HelloWorldService> referenceConfig = new ReferenceConfig<>();
+        referenceConfig.setApplication(applicationConfig);
+        referenceConfig.setRegistry(registryConfig);
+        referenceConfig.setInterface(HelloWorldService.class);
+        referenceConfig.setTimeout(10000);
+        this.helloWorldService = referenceConfig.get();
 
         ReferenceConfig<CallbackService> callbackServiceReferenceConfig = new ReferenceConfig<>();
         callbackServiceReferenceConfig.setApplication(applicationConfig);

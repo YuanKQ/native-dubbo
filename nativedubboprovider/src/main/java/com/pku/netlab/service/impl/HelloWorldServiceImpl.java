@@ -36,4 +36,17 @@ public class HelloWorldServiceImpl implements HelloWorldService {
         System.out.println("==================");
         return "Provider has received param.";
     }
+
+    @Override
+    public String asyncSayHello(String name) {
+        long start = System.currentTimeMillis();
+        System.out.println("Received from: " + name + RpcContext.getContext().getRemoteAddress());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Service cost: " + (System.currentTimeMillis() - start));
+        return "Hello. " + name;
+    }
 }
